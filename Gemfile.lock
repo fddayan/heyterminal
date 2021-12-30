@@ -6,6 +6,7 @@ PATH
       dry-cli (~> 0.4.0)
       rainbow (~> 3.0.0)
       terrapin (~> 0.6.0)
+      tty-spinner (= 0.9.3)
 
 GEM
   remote: https://rubygems.org/
@@ -38,6 +39,9 @@ GEM
     terrapin (0.6.0)
       climate_control (>= 0.0.3, < 1.0)
     transproc (1.1.1)
+    tty-cursor (0.7.1)
+    tty-spinner (0.9.3)
+      tty-cursor (~> 0.7)
 
 PLATFORMS
   ruby

@@ -40,7 +40,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "terrapin", "~> 0.6.0"
   spec.add_dependency "rainbow", "~>3.0.0"
   spec.add_dependency "dry-cli", "~>0.4.0"
-
+  spec.add_dependency "tty-spinner", "0.9.3"
 
   spec.add_development_dependency "bundler", "~> 2.1.4"
   spec.add_development_dependency "rake", "~> 10.0"

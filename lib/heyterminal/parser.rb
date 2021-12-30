@@ -9,7 +9,11 @@ module Heyterminal
     def run(*args)
       line = Terrapin::CommandLine.new(*args)
       puts "#{Rainbow("[" + line.command + "]").magenta}"
-      puts line.run
+      spinner = TTY::Spinner.new
+      spinner.auto_spin
+      output = line.run
+      spinner.stop("Done!")
+      puts output
     end
 
     def capture(*args)

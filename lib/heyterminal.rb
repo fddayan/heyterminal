@@ -1,5 +1,6 @@
 require 'terrapin'
 require 'rainbow'
+require 'tty-spinner'
 require "heyterminal/version"
 require "heyterminal/runner"
 require "heyterminal/parser"
