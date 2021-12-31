@@ -21,6 +21,14 @@ module Heyterminal
       line.run
     end
 
+    def chdir(to, &block)
+      Dir.chdir(project_dir, &block)
+    end
+
+    def home_file_path(*args)
+      File.join(Dir.home, *args)
+    end
+
     def add_expression(expression)
       Heyterminal::Runner.add_expression(expression)
     end

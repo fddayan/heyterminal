@@ -22,7 +22,48 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+create `heyterminal.rb` file in `$HOME` directory or current directory
+
+```
+Hey(<EXPRESION>) do |arg1, arg2}
+  ....execute code
+end
+```
+
+`<EXPRESSION>` is using [cucumber-expression](https://github.com/cucumber/cucumber-expressions).
+
+You can use expression or regex. Look at that documentation. Matching arguments are passed to the block.
+
+```ruby
+Hey("deploy {projectName} to heroku") do |name|
+  dir_path = home_file_path "projects", name
+  chdir(dir_path) do
+    run "git push main heroku"
+    run "heroku run rake db:migrate"
+  end
+end
+```
+
+You can use any ruby code and ruby gem in `heyterminal.rb`, but this command are available to make life easier.
+
+### Commands available
+
+* run(*args)
+* capture(*args)
+* chdir(*args)
+* home_file_path(*args)
+
+
+### Execution
+
+`heyterminal run "deploy fancyproject to heroku"`
+
+```
+Commands:
+  heyterminal list                       # Lists all commands
+  heyterminal run [COMMAND]              # Runs a command
+  heyterminal version                    # Print version
+```
 
 ## Development
 
