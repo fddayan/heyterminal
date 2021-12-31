@@ -54,12 +54,34 @@ You can use any ruby code and ruby gem in `heyterminal.rb`, but this command are
 * home_file_path(*args)
 
 
+### Bash aliases
+
+I suggest you create the following bash alias and function
+
+```
+function hey { heyterminal run "$*"; }
+
+alias ht="heyterminal"
+```
+
+Now you can do
+
+`hey deploy fancyproject to heroky`
+
+without "
+
+also you can use
+
+`ht list`
+
+
 ### Execution
 
 `heyterminal run "deploy fancyproject to heroku"`
 
 ```
 Commands:
+  heyterminal edit                       # Edit heytermianl.rb
   heyterminal list                       # Lists all commands
   heyterminal run [COMMAND]              # Runs a command
   heyterminal version                    # Print version
