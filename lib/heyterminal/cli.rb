@@ -51,9 +51,24 @@ module Heyterminal
         end
       end
 
+      class Edit < Dry::CLI::Command
+        desc "Edit heytermianl.rb"
+
+        option :config, type: :string, default: nil, desc: "HeyTerminal cofiguration file"
+
+        def call(**options)
+           Heyterminal::Runner.load_default(nil)
+
+           line = Terrapin::CommandLine.new("#{Heyterminal::Runner.editor} #{Heyterminal::Runner.file_path}")
+
+           line.run
+        end
+      end
+
      register "version", Version, aliases: ["v", "-v", "--version"]
      register "run",    Run
      register "list",   List
+     register "edit",   Edit
       # register "start",   Start
       # register "stop",    Stop
       # register "exec",    Exec

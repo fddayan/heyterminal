@@ -3,8 +3,16 @@ module Heyterminal
 
     DEFAULT_DSL_FILE_NAME = "heyterminal.rb"
 
+    def self.set_editor(editor)
+      @editor = editor
+    end
+
+    def self.editor
+      @editor
+    end
+
     def self.lod_and_run(file, command)
-      file_path = dsl_path(file)
+      @file_path = dsl_path(file)
 
       raise "file not found in any of directories" if file_path.nil?
 
@@ -31,7 +39,12 @@ module Heyterminal
     end
 
     def self.load_default(file)
-      load(dsl_path(file))
+      @file_path = dsl_path(file)
+      load(@file_path)
+    end
+
+    def self.file_path
+      @file_path
     end
 
     def self.load(file)

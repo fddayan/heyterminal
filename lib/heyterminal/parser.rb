@@ -1,6 +1,10 @@
 module Heyterminal
   class Parser
 
+    def editor(editor)
+      Heyterminal::Runner.set_editor(editor)
+    end
+
     def Hey(command, &block)
       expression_factory = Cucumber:: CucumberExpressions::ExpressionFactory.new(Cucumber::CucumberExpressions::ParameterTypeRegistry.new)
       add_expression [expression_factory.create_expression(command), block]
