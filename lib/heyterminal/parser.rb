@@ -26,7 +26,7 @@ module Heyterminal
     end
 
     def chdir(to, &block)
-      Dir.chdir(project_dir, &block)
+      Dir.chdir(to, &block)
     end
 
     def home_file_path(*args)
