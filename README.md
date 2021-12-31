@@ -66,9 +66,9 @@ alias ht="heyterminal"
 
 Now you can do
 
-`hey deploy fancyproject to heroky`
+`hey deploy fancyproject to heroku`
 
-without "
+without `"`
 
 also you can use
 
