@@ -20,6 +20,10 @@ module Heyterminal
       puts output
     end
 
+    def hey(command)
+      Heyterminal::Runner.run(command)
+    end
+
     def capture(*args)
       line = Terrapin::CommandLine.new(*args)
       line.run
