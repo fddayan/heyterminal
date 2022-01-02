@@ -1,7 +1,7 @@
 module Heyterminal
   class Runner
 
-    DEFAULT_DSL_FILE_NAME = "heyterminal.rb"
+    DEFAULT_DSL_FILE_NAME = 'heyterminal.rb'.freeze
 
     def self.set_editor(editor)
       @editor = editor
@@ -14,7 +14,7 @@ module Heyterminal
     def self.lod_and_run(file, command)
       @file_path = dsl_path(file)
 
-      raise "file not found in any of directories" if file_path.nil?
+      raise 'file not found in any of directories' if file_path.nil?
 
       puts "Using... #{file_path}"
       load(file_path)
@@ -30,12 +30,11 @@ module Heyterminal
         file_path = File.join(Dir.home, "/#{DEFAULT_DSL_FILE_NAME}")
 
         return file_path if File.exist?(file_path)
+      else 
+        file_path = File.join(Dir.pwd, file)
+
+        return file_path if File.exist?(file_path)
       end
-
-
-      file_path = File.join(Dir.pwd,file)
-
-      return file_path if File.exist?(file_path)
     end
 
     def self.load_default(file)
@@ -77,7 +76,8 @@ module Heyterminal
         found = true
         break
       end
-      raise "command not found in config file" unless found
+      raise 'command not found in config file' unless found
+
       result
     end
 
@@ -86,7 +86,7 @@ module Heyterminal
     end
 
     def self.expressions_commands
-      expressions.map{|e| e[0].instance_variable_get("@expression") }
+      expressions.map { |e| e[0].instance_variable_get('@expression') }
     end
   end
 end

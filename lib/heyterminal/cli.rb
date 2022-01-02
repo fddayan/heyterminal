@@ -16,35 +16,30 @@ module Heyterminal
       class Run < Dry::CLI::Command
         desc "Runs a command"
 
-        argument :command, desc: "Command to run"
-        option :config, type: :string, default: nil, desc: "HeyTerminal cofiguration file"
-
-         # example [
-         #   "             # Prints 'wuh?'",
-         #   "hello, folks # Prints 'hello, folks'"
-         # ]
+        argument :command, desc: 'Command to run'
+        option :config, type: :string, default: nil, desc: 'Heyterminal cofiguration file'
 
          def call(command: nil, **options)
            if command.nil?
              puts "command is required"
              exit 2
            else
-             puts Heyterminal::Runner.lod_and_run(nil, command)
+             puts Heyterminal::Runner.lod_and_run(options.fetch(:config), command)
            end
          end
       end
 
       class List < Dry::CLI::Command
-        desc "Lists all commands"
+        desc 'Lists all commands'
 
-        option :config, type: :string, default: nil, desc: "HeyTerminal cofiguration file"
+        option :config, type: :string, default: nil, desc: 'Heyterminal cofiguration file'
 
         def call(**options)
-           Heyterminal::Runner.load_default(nil)
+           Heyterminal::Runner.load_default(options.fetch(:config))
            list = Heyterminal::Runner.expressions_commands
 
-           puts "List of commands"
-           puts "-----------------"
+           puts 'List of commands'
+           puts '-----------------'
            list.each do |exp|
              puts "* #{exp}"
            end
@@ -52,12 +47,12 @@ module Heyterminal
       end
 
       class Edit < Dry::CLI::Command
-        desc "Edit heytermianl.rb"
+        desc 'Edit heytermianl.rb'
 
-        option :config, type: :string, default: nil, desc: "HeyTerminal cofiguration file"
+        option :config, type: :string, default: nil, desc: 'Heyterminal cofiguration file'
 
         def call(**options)
-           Heyterminal::Runner.load_default(nil)
+           Heyterminal::Runner.load_default(options.fetch(:config))
 
            line = Terrapin::CommandLine.new("#{Heyterminal::Runner.editor} #{Heyterminal::Runner.file_path}")
 
@@ -65,18 +60,10 @@ module Heyterminal
         end
       end
 
-     register "version", Version, aliases: ["v", "-v", "--version"]
-     register "run",    Run
-     register "list",   List
-     register "edit",   Edit
-      # register "start",   Start
-      # register "stop",    Stop
-      # register "exec",    Exec
-      #
-      # register "generate", aliases: ["g"] do |prefix|
-      #  prefix.register "config", Generate::Configuration
-      #  prefix.register "test",   Generate::Test
-      # end
+      register 'version', Version, aliases: ['v', '-v', '--version']
+      register 'run',    Run
+      register 'list',   List
+      register 'edit',   Edit
     end
   end
 end

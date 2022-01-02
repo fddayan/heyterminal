@@ -1,8 +1,38 @@
 # Heyterminal
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/heyterminal`. To experiment with that code, run `bin/console` for an interactive prompt.
+This is just another tool for running command lines from the terminal. 
+I was inspired by my Google Assistance to build it. 
+I just wanted to say to my terminal `hey termianl do this`.
+I'm currently usign it and it's proven more usefull and friendly than running `bash` scripts or other `cli` tools like `thor`.
 
-TODO: Delete this and the text above, and describe your gem
+Basically, you will need have to create a `heyterminal.rb` and that will have your commands in a DSL format in `ruby` code. (but you don't need to know `ruby`).
+
+for example in your `heyterminal.rb` you can have :
+
+```ruby
+Hey("build and install gem project {projectName} with version {version}") do |name, version|
+  dir_path = home_file_path "projects", name
+  chdir(dir_path) do
+    run "gem build #{name}.gemspec"
+    run "gem installl #{name}-#{version}.gem"
+  end
+end
+```
+
+and you call that command from the terminal as follow:
+
+`heytermianl run "build and install gem project heytermianl with version 0.1.0"`
+
+* That changes directory to the `heyterminal` project
+* Then builds the gem based on the name (`heyterminal`)
+* Then installs the gem based on the name and the version
+
+As common practice if you don't specify a `terminal.rb` file, it will search for a config file in this order 
+
+* current directory `./heyterminal.rb`
+* home directory    `~/heyterminal.rb`
+
+if you specify a `heyterminal.rb` file passing the `-c` flag, that takes priority.
 
 ## Installation
 
@@ -24,7 +54,7 @@ Or install it yourself as:
 
 create `heyterminal.rb` file in `$HOME` directory or current directory
 
-```
+```ruby
 Hey(<EXPRESION>) do |arg1, arg2}
   ....execute code
 end
@@ -48,15 +78,18 @@ You can use any ruby code and ruby gem in `heyterminal.rb`, but this command are
 
 ### Commands available
 
-* run(*args)
-* capture(*args)
-* chdir(*args)
-* home_file_path(*args)
+| Command                  | Description                                         |
+|--------------------------|-----------------------------------------------------|
+| run(*args)               | Runs a command in the terminal, prints out the outout|
+| capture(*args)           | Runs a command in the termina, does not print out the output, it returns the output instead |
+| chdir(*args)             | changes directory in the termianl |               
+| home_file_path(*args)    | returns a a file path based from the `$HOME` path |
+| hey                      | You can call another command just as you would from the terminal"
 
 
 ### Bash aliases
 
-I suggest you create the following bash alias and function
+I suggest you create the following bash `alias` and `function`
 
 ```
 function hey { heyterminal run "$*"; }
@@ -64,13 +97,13 @@ function hey { heyterminal run "$*"; }
 alias ht="heyterminal"
 ```
 
-Now you can do
+Now you can run from the terminal:
 
 `hey deploy fancyproject to heroku`
 
-without `"`
+you don't have to specify quotes (`"`).
 
-also you can use
+also you can use shorcut `nt` like:
 
 `ht list`
 
