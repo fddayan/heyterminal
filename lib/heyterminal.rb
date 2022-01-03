@@ -10,10 +10,8 @@ require 'cucumber/cucumber_expressions/expression_factory'
 require "heyterminal/version"
 require "heyterminal/runner"
 require "heyterminal/parser"
+require 'heyterminal/cli_command'
 require "heyterminal/cli"
-require 'heyterminal/command'
-
-puts ">" * 100
 
 module Heyterminal
   class Error < StandardError; end

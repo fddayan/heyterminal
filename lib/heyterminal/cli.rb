@@ -3,7 +3,7 @@ module Heyterminal
     module Commands
       extend Dry::CLI::Registry
 
-      class Version < Heyterminal::Command
+      class Version < Heyterminal::CliCommand
          desc "Print version"
 
          def call(*)
@@ -11,28 +11,29 @@ module Heyterminal
          end
       end
 
-      class Run < Heyterminal::Command
-        desc "Runs a command"
+      class Run < Heyterminal::CliCommand
+        desc 'Runs a command'
 
         argument :command, desc: 'Command to run'
         option :config, type: :string, default: nil, desc: 'Heyterminal cofiguration file'
 
-         def call(command: nil, **options)
-           if command.nil?
-             raise Heyterminal::Error, `command is required`
-           else
-             puts Heyterminal::Runner.lod_and_run(options.fetch(:config), command)
-           end
-         end
+        def call(command: nil, **options)
+          safe_call do
+            raise Heyterminal::Error, 'command is required' if command.nil?
+
+            puts Heyterminal::Runner.lod_and_run(options.fetch(:config, nil), command)
+          end
+        end
       end
 
-      class List < Heyterminal::Command
+      class List < Heyterminal::CliCommand
         desc 'Lists all commands'
 
         option :config, type: :string, default: nil, desc: 'Heyterminal cofiguration file'
 
         def call(**options)
-           Heyterminal::Runner.load_default(options.fetch(:config))
+          safe_call do
+           Heyterminal::Runner.load_default(options.fetch(:config, nil))
            list = Heyterminal::Runner.expressions_commands
 
            puts 'List of commands'
@@ -40,20 +41,23 @@ module Heyterminal
            list.each do |exp|
              puts "* #{exp}"
            end
+          end
         end
       end
 
-      class Edit < Heyterminal::Command
+      class Edit < Heyterminal::CliCommand
         desc 'Edit heytermianl.rb'
 
         option :config, type: :string, default: nil, desc: 'Heyterminal cofiguration file'
 
         def call(**options)
-           Heyterminal::Runner.load_default(options.fetch(:config))
+          safe_call do
+           Heyterminal::Runner.load_default(options.fetch(:config, nil))
 
            line = Terrapin::CommandLine.new("#{Heyterminal::Runner.editor} #{Heyterminal::Runner.file_path}")
 
            line.run
+          end
         end
       end
 
