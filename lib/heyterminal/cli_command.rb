@@ -1,5 +1,5 @@
 module Heyterminal
-  class Command < Dry::CLI::Command
+  class CliCommand < Dry::CLI::Command
 
     def call(*args)
       begin

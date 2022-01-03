@@ -1,5 +1,3 @@
-require "dry/cli"
-
 module Heyterminal
   module Cli
     module Commands
