@@ -12,11 +12,11 @@ module Heyterminal
 
     def run(*args)
       line = Terrapin::CommandLine.new(*args)
-      puts "#{Rainbow("[" + line.command + "]").magenta}"
+      puts Rainbow("[" + line.command + "]").magenta.to_s
       spinner = TTY::Spinner.new
       spinner.auto_spin
       output = line.run
-      spinner.stop("Done!")
+      spinner.stop('Done!')
       puts output
     end
 

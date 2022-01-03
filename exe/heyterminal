@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
 
-require "heyterminal"
+require 'heyterminal'
 
 Dry::CLI.new(Heyterminal::Cli::Commands).call
