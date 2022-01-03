@@ -32,7 +32,7 @@ As common practice if you don't specify a `terminal.rb` file, it will search for
 * current directory `./heyterminal.rb`
 * home directory    `~/heyterminal.rb`
 
-if you specify a `heyterminal.rb` file passing the `-c` flag, that takes priority.
+if you specify a `heyterminal.rb` file passing the `--config` flag, that takes priority.
 
 ## Installation
 

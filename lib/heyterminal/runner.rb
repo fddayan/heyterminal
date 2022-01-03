@@ -14,7 +14,7 @@ module Heyterminal
     def self.lod_and_run(file, command)
       @file_path = dsl_path(file)
 
-      raise 'file not found in any of directories' if file_path.nil?
+      raise Heytermian::Error, 'file not found in any of directories' if file_path.nil?
 
       puts "Using... #{file_path}"
       load(file_path)
@@ -76,7 +76,7 @@ module Heyterminal
         found = true
         break
       end
-      raise 'command not found in config file' unless found
+      raise Heytermian::Error, 'command not found in config file' unless found
 
       result
     end

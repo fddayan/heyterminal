@@ -5,6 +5,7 @@ require "heyterminal/version"
 require "heyterminal/runner"
 require "heyterminal/parser"
 require "heyterminal/cli"
+require 'heyterminal/command'
 require 'cucumber/cucumber_expressions/parameter_type_registry'
 require 'cucumber/cucumber_expressions/cucumber_expression'
 require 'cucumber/cucumber_expressions/regular_expression'

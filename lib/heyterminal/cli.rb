@@ -5,7 +5,7 @@ module Heyterminal
     module Commands
       extend Dry::CLI::Registry
 
-      class Version < Dry::CLI::Command
+      class Version < Heyterminal::Command
          desc "Print version"
 
          def call(*)
@@ -13,7 +13,7 @@ module Heyterminal
          end
       end
 
-      class Run < Dry::CLI::Command
+      class Run < Heyterminal::Command
         desc "Runs a command"
 
         argument :command, desc: 'Command to run'
@@ -21,15 +21,14 @@ module Heyterminal
 
          def call(command: nil, **options)
            if command.nil?
-             puts "command is required"
-             exit 2
+             raise Heyterminal::Error, `command is required`
            else
              puts Heyterminal::Runner.lod_and_run(options.fetch(:config), command)
            end
          end
       end
 
-      class List < Dry::CLI::Command
+      class List < Heyterminal::Command
         desc 'Lists all commands'
 
         option :config, type: :string, default: nil, desc: 'Heyterminal cofiguration file'
@@ -46,7 +45,7 @@ module Heyterminal
         end
       end
 
-      class Edit < Dry::CLI::Command
+      class Edit < Heyterminal::Command
         desc 'Edit heytermianl.rb'
 
         option :config, type: :string, default: nil, desc: 'Heyterminal cofiguration file'
