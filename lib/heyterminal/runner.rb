@@ -63,14 +63,14 @@ module Heyterminal
       found = false
       @expressions.each do |expression|
         cucumber, block = expression
-        expression_text = cucumber.instance_variable_get("@expression")
+        expression_text = cucumber.instance_variable_get('@expression')
         matched = cucumber.match(command)
 
         next if matched.nil?
 
-        puts Rainbow("=" * 20).yellow
+        puts Rainbow('=' * 20).yellow
         puts Rainbow("Hey running.... #{expression_text}").yellow
-        puts Rainbow("=" * 20).yellow
+        puts Rainbow('=' * 20).yellow
 
         block.call(*matched.map { |m| m.value(nil)})
         found = true
